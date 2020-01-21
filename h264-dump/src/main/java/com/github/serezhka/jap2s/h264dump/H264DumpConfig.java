@@ -1,6 +1,5 @@
 package com.github.serezhka.jap2s.h264dump;
 
-import com.github.serezhka.jap2lib.AirPlayBonjour;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
