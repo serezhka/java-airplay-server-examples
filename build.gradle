@@ -1,0 +1,30 @@
+plugins {
+    id "io.freefair.lombok" version "4.1.6"
+    id "org.springframework.boot" version "2.1.8.RELEASE"
+    id "io.spring.dependency-management" version "1.0.8.RELEASE"
+}
+
+subprojects {
+    group = 'com.github.serezhka'
+    version = '0.0.1-SNAPSHOT'
+
+    apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven {
+            url "https://jitpack.io"
+        }
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.boot:spring-boot-dependencies:2.1.9.RELEASE")
+        }
+    }
+}
