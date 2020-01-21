@@ -1,5 +1,8 @@
 # java-airplay-server-examples
 
+[![Build Status](https://travis-ci.com/serezhka/java-airplay-server-examples.svg?branch=master)](https://travis-ci.com/serezhka/java-airplay-server-examples) [![HitCount](http://hits.dwyl.io/serezhka/java-airplay-server-examples.svg)](http://hits.dwyl.io/serezhka/java-airplay-server-examples)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
+
 All examples were tested with iPhone X (iOS 13.3)
 
 ## tcp-forwarder
