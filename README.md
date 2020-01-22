@@ -12,10 +12,18 @@ Forwards mirror data to TCP
 Play it with [GStreamer](https://gstreamer.freedesktop.org/) or [FFmpeg](https://www.ffmpeg.org/)
 
 ```Shell
+cd tcp-forwarder/
+
+gradle bootRun
+
 gst-launch-1.0 -v tcpclientsrc port=5002 ! h264parse ! avdec_h264 ! autovideosink
+
+or 
 
 ffplay -f h264 -codec:v h264 -i tcp://localhost:5002 -v debug
 ```
+
+<img src="https://github.com/serezhka/java-airplay-server-examples/blob/media/gstreamer_playback.gif" width="600">
 
 ## h264-dump
 
