@@ -29,13 +29,17 @@ ffplay -f h264 -codec:v h264 -i tcp://localhost:5002 -v debug
 
 Saves mirror data stream to h264 file
 
-[H264Dump.java](https://github.com/serezhka/java-airplay-server/blob/master/h264-dump/src/main/java/com/github/serezhka/jap2s/h264dump/H264Dump.java)
+cd h264-dump/
+
+gradle bootRun
 
 ## vlcj-player
 
 Playback screen mirroring in embedded vlc
 
-[VLCJPlayer.java](https://github.com/serezhka/java-airplay-server/blob/master/vlcj-player/src/main/java/com/github/serezhka/jap2s/vlcj/VLCJPlayer.java)
+cd vlcj-player/
+
+gradle bootRun
 
 <img src="https://github.com/serezhka/java-airplay-server/blob/media/vlcj_player_demo.gif" width="600">
 
@@ -43,8 +47,10 @@ Playback screen mirroring in embedded vlc
 
 Playback screen mirroring with [jmuxer](https://github.com/samirkumardas/jmuxer)
 
-[JMuxerWebSocketServer.java](https://github.com/serezhka/java-airplay-server/blob/master/jmuxer-player/src/main/java/com/github/serezhka/jap2s/jmuxer/JMuxerWebSocketServer.java)
+cd vlcj-player/
 
-[index-h264.html](https://github.com/serezhka/java-airplay-server/blob/master/index-h264.html)
+gradle bootRun
+
+open index-h264.html in browser
 
 <img src="https://github.com/serezhka/java-airplay-server/blob/media/jmuxer_player_demo.gif" width="600">
