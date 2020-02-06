@@ -8,5 +8,5 @@ dependencies {
     implementation 'net.java.dev.jna:jna:5.4.0'
     implementation 'net.java.dev.jna:jna-platform:5.4.0'
     implementation "uk.co.caprica:vlcj:4.2.0"
-    implementation "com.github.serezhka:java-airplay-server:1.0.0"
+    implementation "com.github.serezhka:java-airplay-server:1.0.1"
 }

@@ -11,7 +11,6 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.io.IOException;
 
-@Slf4j
 @SpringBootApplication
 public class H264DumpApp {
 
@@ -34,13 +33,11 @@ public class H264DumpApp {
     @PostConstruct
     private void postConstruct() throws Exception {
         airPlayServer.start();
-        log.info("AirPlay server started!");
     }
 
     @PreDestroy
     private void preDestroy() throws IOException {
         h264Dump.save();
         airPlayServer.stop();
-        log.info("AirPlay server stopped!");
     }
 }
