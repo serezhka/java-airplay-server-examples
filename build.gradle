@@ -1,7 +1,7 @@
 plugins {
     id "io.freefair.lombok" version "4.1.6"
-    id "org.springframework.boot" version "2.1.8.RELEASE"
-    id "io.spring.dependency-management" version "1.0.8.RELEASE"
+    id "org.springframework.boot" version "2.3.4.RELEASE"
+    id "io.spring.dependency-management" version "1.0.10.RELEASE"
 }
 
 subprojects {
@@ -9,6 +9,8 @@ subprojects {
     version = '0.0.1-SNAPSHOT'
 
     apply plugin: 'java'
+    apply plugin: 'io.freefair.lombok'
+    apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
     sourceCompatibility = JavaVersion.VERSION_11
@@ -24,12 +26,17 @@ subprojects {
 
     dependencyManagement {
         imports {
-            mavenBom("org.springframework.boot:spring-boot-dependencies:2.1.9.RELEASE")
+            mavenBom("org.springframework.boot:spring-boot-dependencies:2.3.4.RELEASE")
         }
+    }
+
+    dependencies {
+        implementation "com.github.serezhka:java-airplay-server:1.0.2"
+        // implementation files('C:\\projects\\java-airplay-server\\build\\libs\\java-airplay-server-1.0.2-all.jar')
     }
 }
 
 wrapper {
-    gradleVersion = '6.1.1'
+    gradleVersion = '6.6.1'
     distributionType = Wrapper.DistributionType.ALL
 }

@@ -1,6 +1,5 @@
 package com.github.serezhka.jap2s.h264dump;
 
-
 import com.github.serezhka.jap2server.MirrorDataConsumer;
 
 import java.io.IOException;

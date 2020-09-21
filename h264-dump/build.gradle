@@ -1,9 +1,3 @@
-plugins {
-    id "io.freefair.lombok"
-    id "org.springframework.boot"
-}
-
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter"
-    implementation "com.github.serezhka:java-airplay-server:1.0.1"
 }
