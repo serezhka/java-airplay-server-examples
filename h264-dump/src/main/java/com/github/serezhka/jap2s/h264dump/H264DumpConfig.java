@@ -15,8 +15,9 @@ import java.io.IOException;
 public class H264DumpConfig {
 
     @Bean
-    public static H264Dump mirrorDataConsumer(@Value("${dump.name}") String dumpName) throws IOException {
-        return new H264Dump(dumpName);
+    public static H264Dump mirrorDataConsumer(@Value("${video.dump.name}") String videoDumpName,
+                                              @Value("${audio.dump.name}") String audioDumpName) throws IOException {
+        return new H264Dump(videoDumpName, audioDumpName);
     }
 
     @Bean

@@ -1,6 +1,6 @@
 package com.github.serezhka.jap2s.vlcj;
 
-import com.github.serezhka.jap2server.MirrorDataConsumer;
+import com.github.serezhka.jap2server.AirplayDataConsumer;
 import lombok.extern.slf4j.Slf4j;
 import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
 import uk.co.caprica.vlcj.log.LogLevel;
@@ -17,7 +17,7 @@ import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 
 @Slf4j
-public class VLCJPlayer implements MirrorDataConsumer {
+public class VLCJPlayer implements AirplayDataConsumer {
 
     private EmbeddedMediaPlayerComponent mediaPlayerComponent;
     private JFrame f;
@@ -88,11 +88,15 @@ public class VLCJPlayer implements MirrorDataConsumer {
     }
 
     @Override
-    public void onData(byte[] data) {
+    public void onVideo(byte[] video) {
         try {
-            output.write(data);
+            output.write(video);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onAudio(byte[] audio) {
     }
 }

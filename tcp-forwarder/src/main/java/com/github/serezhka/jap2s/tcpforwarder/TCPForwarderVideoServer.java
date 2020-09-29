@@ -1,6 +1,5 @@
 package com.github.serezhka.jap2s.tcpforwarder;
 
-import com.github.serezhka.jap2server.MirrorDataConsumer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -16,11 +15,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
 import java.net.InetSocketAddress;
 
 @Slf4j
 @Component
-public class TCPForwarderServer extends SimpleChannelInboundHandler<ByteBuf> implements MirrorDataConsumer {
+public class TCPForwarderVideoServer extends SimpleChannelInboundHandler<ByteBuf> {
 
     private final EventLoopGroup bossGroup;
     private final EventLoopGroup workerGroup;
@@ -28,20 +28,20 @@ public class TCPForwarderServer extends SimpleChannelInboundHandler<ByteBuf> imp
 
     private ChannelHandlerContext ctx;
 
-    @Value("${tcp.forwarder.port}")
+    @Value("${tcp.forwarder.video.port}")
     private int port;
 
     @Autowired
-    public TCPForwarderServer(EventLoopGroup bossGroup,
-                              EventLoopGroup workerGroup,
-                              Class<? extends ServerSocketChannel> serverSocketChannelClass) {
+    public TCPForwarderVideoServer(EventLoopGroup bossGroup,
+                                   EventLoopGroup workerGroup,
+                                   Class<? extends ServerSocketChannel> serverSocketChannelClass) throws IOException {
         this.bossGroup = bossGroup;
         this.workerGroup = workerGroup;
         this.serverSocketChannelClass = serverSocketChannelClass;
     }
 
     @PostConstruct
-    public void init() {
+    public void postConstruct() {
         new Thread(() -> {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             try {
@@ -51,10 +51,10 @@ public class TCPForwarderServer extends SimpleChannelInboundHandler<ByteBuf> imp
                         .childHandler(new ChannelInitializer<SocketChannel>() {
                             @Override
                             public void initChannel(final SocketChannel ch) {
-                                ch.pipeline().addLast(TCPForwarderServer.this);
+                                ch.pipeline().addLast(TCPForwarderVideoServer.this);
                             }
                         });
-                log.info("Starting TCP socket server on port {}", port);
+                log.info("Starting TCP socket video server on port {}", port);
                 serverBootstrap.bind().sync().channel().closeFuture().sync();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -69,17 +69,16 @@ public class TCPForwarderServer extends SimpleChannelInboundHandler<ByteBuf> imp
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) {
         this.ctx = ctx;
-        log.info("TCP receiver connected!");
+        log.info("TCP video receiver connected!");
     }
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) {
         this.ctx = null;
-        log.info("TCP receiver disconnected!");
+        log.info("TCP video receiver disconnected!");
     }
 
-    @Override
-    public void onData(byte[] data) {
+    public void onVideoData(byte[] data) {
         sendData(Unpooled.wrappedBuffer(data));
     }
 
@@ -87,7 +86,6 @@ public class TCPForwarderServer extends SimpleChannelInboundHandler<ByteBuf> imp
         if (ctx != null) {
             ctx.executor().execute(() -> ctx.writeAndFlush(message.retain()));
             //ctx.writeAndFlush(message.retain());
-            log.debug("TCP data sent!");
         } else message.release();
     }
 }

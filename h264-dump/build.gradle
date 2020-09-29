@@ -1,3 +1,4 @@
 dependencies {
-    implementation "org.springframework.boot:spring-boot-starter"
+    implementation "com.github.serezhka:fdk-aac-jni:1.0.0"
+    // implementation files('C:\\projects\\fdk-aac-jni\\build\\libs\\fdk-aac-jni-1.0.0-all.jar')
 }

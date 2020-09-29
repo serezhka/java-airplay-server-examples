@@ -1,6 +1,8 @@
 package com.github.serezhka.jap2s.h264dump;
 
-import com.github.serezhka.jap2server.MirrorDataConsumer;
+import com.github.serezhka.fdkaacjni.FdkAacLib;
+import com.github.serezhka.jap2server.AirplayDataConsumer;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -8,24 +10,44 @@ import java.nio.channels.FileChannel;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
-public class H264Dump implements MirrorDataConsumer {
+@Slf4j
+public class H264Dump implements AirplayDataConsumer {
 
-    private final FileChannel fc;
+    private final FileChannel videoFileChannel;
+    private FileChannel audioFileChannel;
 
-    public H264Dump(String dumpName) throws IOException {
-        fc = FileChannel.open(Paths.get(dumpName), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
+    public H264Dump(String videoDumpName, String audioDumpName) throws IOException {
+        videoFileChannel = FileChannel.open(Paths.get(videoDumpName), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
+        if (FdkAacLib.isInitialized()) {
+            audioFileChannel = FileChannel.open(Paths.get(audioDumpName), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
+        }
     }
 
     @Override
-    public void onData(byte[] data) {
+    public void onVideo(byte[] video) {
         try {
-            fc.write(ByteBuffer.wrap(data));
+            videoFileChannel.write(ByteBuffer.wrap(video));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    @Override
+    public void onAudio(byte[] audio) {
+        if (FdkAacLib.isInitialized()) {
+            byte[] audioDecoded = new byte[480 * 4];
+            FdkAacLib.decodeFrame(audio, audioDecoded);
+
+            try {
+                audioFileChannel.write(ByteBuffer.wrap(audioDecoded));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public void save() throws IOException {
-        fc.close();
+        videoFileChannel.close();
+        audioFileChannel.close();
     }
 }

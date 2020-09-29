@@ -7,4 +7,5 @@ gradle/wrapper/*
 out
 build
 lombok.config
-dump.h264
+*.dll
+log

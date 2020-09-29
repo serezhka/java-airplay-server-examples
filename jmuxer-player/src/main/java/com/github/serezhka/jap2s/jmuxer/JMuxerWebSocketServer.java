@@ -1,14 +1,10 @@
 package com.github.serezhka.jap2s.jmuxer;
 
-import com.github.serezhka.jap2server.MirrorDataConsumer;
+import com.github.serezhka.jap2server.AirplayDataConsumer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
-import io.netty.channel.ChannelHandler;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.*;
 import io.netty.channel.socket.ServerSocketChannel;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.http.HttpObjectAggregator;
@@ -25,7 +21,7 @@ import java.net.InetSocketAddress;
 @Slf4j
 @Component
 @ChannelHandler.Sharable
-public class JMuxerWebSocketServer extends SimpleChannelInboundHandler<BinaryWebSocketFrame> implements MirrorDataConsumer {
+public class JMuxerWebSocketServer extends SimpleChannelInboundHandler<BinaryWebSocketFrame> implements AirplayDataConsumer {
 
     private final EventLoopGroup bossGroup;
     private final EventLoopGroup workerGroup;
@@ -90,14 +86,18 @@ public class JMuxerWebSocketServer extends SimpleChannelInboundHandler<BinaryWeb
     }
 
     @Override
-    public void onData(byte[] data) {
-        mirrorData.writeBytes(data);
+    public void onVideo(byte[] video) {
+        mirrorData.writeBytes(video);
         nalus++;
         if (nalus > 30) {
             nalus = 0;
             sendData(mirrorData);
             mirrorData = ByteBufAllocator.DEFAULT.buffer();
         }
+    }
+
+    @Override
+    public void onAudio(byte[] audio) {
     }
 
     private void sendData(ByteBuf message) {

@@ -1,6 +1,7 @@
 package com.github.serezhka.jap2s.tcpforwarder;
 
 import com.github.serezhka.jap2server.AirPlayServer;
+import com.github.serezhka.jap2server.AirplayDataConsumer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,8 +22,21 @@ public class TCPForwarderApp {
     public TCPForwarderApp(@Value("${server.name}") String serverName,
                            @Value("${airplay.port}") int airPlayPort,
                            @Value("${airtunes.port}") int airTunesPort,
-                           TCPForwarderServer tcpForwarderServer) {
-        airPlayServer = new AirPlayServer(serverName, airPlayPort, airTunesPort, tcpForwarderServer);
+                           TCPForwarderAudioServer tcpForwarderAudioServer,
+                           TCPForwarderVideoServer tcpForwarderVideoServer) {
+        AirplayDataConsumer mirrorDataConsumer = new AirplayDataConsumer() {
+            @Override
+            public void onVideo(byte[] video) {
+                tcpForwarderVideoServer.onVideoData(video);
+            }
+
+            @Override
+            public void onAudio(byte[] audio) {
+                tcpForwarderAudioServer.onAudioData(audio);
+            }
+        };
+
+        airPlayServer = new AirPlayServer(serverName, airPlayPort, airTunesPort, mirrorDataConsumer);
     }
 
     public static void main(String[] args) {
