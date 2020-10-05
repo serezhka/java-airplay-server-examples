@@ -33,8 +33,8 @@ subprojects {
     dependencies {
         implementation "org.springframework.boot:spring-boot-starter"
         annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-        implementation "com.github.serezhka:java-airplay-server:1.0.3"
-        //implementation files('C:\\projects\\java-airplay-server\\build\\libs\\java-airplay-server-1.0.3-all.jar')
+        implementation "com.github.serezhka:java-airplay-server:1.0.4"
+        // implementation files('C:\\projects\\java-airplay-server\\build\\libs\\java-airplay-server-1.0.4-all.jar')
     }
 }
 
