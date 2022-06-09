@@ -1,5 +1,7 @@
 package com.github.serezhka.jap2s.jmuxer;
 
+import com.github.serezhka.jap2lib.rtsp.AudioStreamInfo;
+import com.github.serezhka.jap2lib.rtsp.VideoStreamInfo;
 import com.github.serezhka.jap2server.AirplayDataConsumer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
@@ -98,6 +100,14 @@ public class JMuxerWebSocketServer extends SimpleChannelInboundHandler<BinaryWeb
 
     @Override
     public void onAudio(byte[] audio) {
+    }
+
+    @Override
+    public void onVideoFormat(VideoStreamInfo videoStreamInfo) {
+    }
+
+    @Override
+    public void onAudioFormat(AudioStreamInfo audioInfo) {
     }
 
     private void sendData(ByteBuf message) {

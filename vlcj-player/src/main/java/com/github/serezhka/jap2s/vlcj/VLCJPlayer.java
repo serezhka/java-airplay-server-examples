@@ -1,5 +1,7 @@
 package com.github.serezhka.jap2s.vlcj;
 
+import com.github.serezhka.jap2lib.rtsp.AudioStreamInfo;
+import com.github.serezhka.jap2lib.rtsp.VideoStreamInfo;
 import com.github.serezhka.jap2server.AirplayDataConsumer;
 import lombok.extern.slf4j.Slf4j;
 import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
@@ -22,7 +24,7 @@ public class VLCJPlayer implements AirplayDataConsumer {
     private EmbeddedMediaPlayerComponent mediaPlayerComponent;
     private JFrame f;
 
-    private PipedOutputStream output;
+    private final PipedOutputStream output;
     private PipedInputStream input;
     private NonSeekableInputStreamMedia nsism;
 
@@ -98,5 +100,13 @@ public class VLCJPlayer implements AirplayDataConsumer {
 
     @Override
     public void onAudio(byte[] audio) {
+    }
+
+    @Override
+    public void onVideoFormat(VideoStreamInfo videoStreamInfo) {
+    }
+
+    @Override
+    public void onAudioFormat(AudioStreamInfo audioInfo) {
     }
 }

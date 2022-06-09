@@ -1,6 +1,5 @@
 package com.github.serezhka.jap2s.tcpforwarder;
 
-import com.github.serezhka.fdkaacjni.FdkAacLib;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -43,9 +42,9 @@ public class TCPForwarderAudioServer extends SimpleChannelInboundHandler<ByteBuf
 
     @PostConstruct
     public void postConstruct() {
-        if (!FdkAacLib.isInitialized()) {
+        /*if (!FdkAacLib.isInitialized()) {
             return;
-        }
+        }*/
         new Thread(() -> {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             try {
@@ -83,11 +82,12 @@ public class TCPForwarderAudioServer extends SimpleChannelInboundHandler<ByteBuf
     }
 
     public void onAudioData(byte[] data) {
-        if (FdkAacLib.isInitialized()) {
+        /*if (FdkAacLib.isInitialized()) {
             byte[] audioDecoded = new byte[480 * 4];
             FdkAacLib.decodeFrame(data, audioDecoded);
             sendData(Unpooled.wrappedBuffer(audioDecoded));
-        }
+        }*/
+        sendData(Unpooled.wrappedBuffer(data));
     }
 
     private void sendData(ByteBuf message) {

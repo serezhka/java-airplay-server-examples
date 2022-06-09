@@ -1,4 +1,4 @@
 dependencies {
-    implementation "com.github.serezhka:fdk-aac-jni:1.0.0"
-    // implementation files('C:\\projects\\fdk-aac-jni\\build\\libs\\fdk-aac-jni-1.0.0-all.jar')
+    implementation 'com.github.serezhka:fdk-aac-jni:1.0.0'
+    // implementation files("$project.rootDir\\..\\fdk-aac-jni\\build\\libs\\fdk-aac-jni-1.0.0-all.jar")
 }

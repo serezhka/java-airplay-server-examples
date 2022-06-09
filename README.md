@@ -1,9 +1,17 @@
 # java-airplay-server-examples
 
-[![Build Status](https://travis-ci.com/serezhka/java-airplay-server-examples.svg?branch=master)](https://travis-ci.com/serezhka/java-airplay-server-examples) [![HitCount](http://hits.dwyl.io/serezhka/java-airplay-server-examples.svg)](http://hits.dwyl.io/serezhka/java-airplay-server-examples)
+[![build](https://github.com/serezhka/java-airplay-server-examples/actions/workflows/build.yaml/badge.svg)](https://github.com/serezhka/java-airplay-server-examples/actions/workflows/build.yaml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 
 All examples were tested with iPhone X (iOS 14.0.1)
+
+## gstreamer-player
+
+09.06.2022 supports both video and audio (alac + aac_eld)
+
+Gstreamer installation required (see https://github.com/gstreamer-java/gst1-java-core)
+
+TODO description
 
 ## tcp-forwarder
 
@@ -45,11 +53,14 @@ You need to compile [lib-fdk-aac](https://github.com/serezhka/fdk-aac-jni) for a
 
 ## vlcj-player
 
-Playback screen mirroring in embedded vlc
+Playback screen mirroring in embedded vlc\
+Install VLC (https://github.com/caprica/vlcj)
 
+```Shell
 cd vlcj-player/
 
 gradle bootRun
+```
 
 <img src="https://github.com/serezhka/java-airplay-server/blob/media/vlcj_player_demo.gif" width="600">
 
@@ -57,9 +68,11 @@ gradle bootRun
 
 Playback screen mirroring with [jmuxer](https://github.com/samirkumardas/jmuxer)
 
+```Shell
 cd vlcj-player/
 
 gradle bootRun
+```
 
 open index-h264.html in browser
 

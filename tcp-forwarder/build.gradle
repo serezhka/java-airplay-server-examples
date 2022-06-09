@@ -1,5 +1,5 @@
 dependencies {
-    implementation "io.netty:netty-all:4.1.52.Final"
-    implementation "com.github.serezhka:fdk-aac-jni:1.0.0"
-    // implementation files('C:\\projects\\fdk-aac-jni\\build\\libs\\fdk-aac-jni-1.0.0-all.jar')
+    implementation 'io.netty:netty-all:4.1.77.Final'
+    implementation 'com.github.serezhka:fdk-aac-jni:1.0.0'
+    // implementation files("$project.rootDir\\..\\fdk-aac-jni\\build\\libs\\fdk-aac-jni-1.0.0-all.jar")
 }

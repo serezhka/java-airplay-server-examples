@@ -1,5 +1,7 @@
 package com.github.serezhka.jap2s.tcpforwarder;
 
+import com.github.serezhka.jap2lib.rtsp.AudioStreamInfo;
+import com.github.serezhka.jap2lib.rtsp.VideoStreamInfo;
 import com.github.serezhka.jap2server.AirPlayServer;
 import com.github.serezhka.jap2server.AirplayDataConsumer;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +35,14 @@ public class TCPForwarderApp {
             @Override
             public void onAudio(byte[] audio) {
                 tcpForwarderAudioServer.onAudioData(audio);
+            }
+
+            @Override
+            public void onVideoFormat(VideoStreamInfo videoStreamInfo) {
+            }
+
+            @Override
+            public void onAudioFormat(AudioStreamInfo audioInfo) {
             }
         };
 
