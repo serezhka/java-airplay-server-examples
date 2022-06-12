@@ -12,6 +12,13 @@ All examples were tested with iPhone X (iOS 14.0.1)
 
 Gstreamer installation required (see https://github.com/gstreamer-java/gst1-java-core)
 
+<details>
+  <summary>video demo</summary>
+
+https://user-images.githubusercontent.com/476359/173236828-204a64c0-54da-4020-93c7-2987c4f9301c.mp4
+</details>
+
+
 TODO description
 
 ## tcp-forwarder
@@ -36,7 +43,12 @@ ffplay -autoexit -f s16le -ar 44100 -ac 2 tcp://localhost:5003
 
 You need to compile [lib-fdk-aac](https://github.com/serezhka/fdk-aac-jni) for aac-eld decoding
 
+<details>
+  <summary>gif demo</summary>
+
 <img src="https://github.com/serezhka/java-airplay-server-examples/blob/media/gstreamer_playback.gif" width="600">
+</details>
+
 
 ## h264-dump
 
@@ -63,7 +75,12 @@ cd vlcj-player/
 gradle bootRun
 ```
 
+<details>
+  <summary>gif demo</summary>
+
 <img src="https://github.com/serezhka/java-airplay-server/blob/media/vlcj_player_demo.gif" width="600">
+</details>
+
 
 ## jmuxer-player
 
@@ -77,4 +94,8 @@ gradle bootRun
 
 open index-h264.html in browser
 
+<details>
+  <summary>gif demo</summary>
+
 <img src="https://github.com/serezhka/java-airplay-server/blob/media/jmuxer_player_demo.gif" width="600">
+</details>
